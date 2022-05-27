@@ -1,0 +1,128 @@
+---
+title: "Cereals"
+output:
+  html_document:
+    df_print: paged
+---
+
+### Objective
+
+According to the National Center for Health Statistics, United States, in 2015–2018, 82.4% of children and adolescents consumed breakfast on a given day. Milk, **cereal**, and water were the most frequently consumed breakfast foods and beverages for children and adolescents aged 2–19 years.
+
+According to the [Center for Disease Control and Prevention](https://www.cdc.gov/nchs/data/hus/2019/021-508.pdf), 20.3% of children between the ages of 6-11 years old and 21.2% of children between the ages of 12-19 years of age are obese. Moreover, 90% of US children ages 6–18 years consume too much [sodium](https://www.cdc.gov/vitalsigns/children-sodium/index.html#:~:text=A%20high%20sodium%20diet%20can,for%20those%20who%20are%20overweight).
+
+As breakfast is widely consumed by children, I would like to analyse the nutritional content of different cereal brands available in the United States.
+
+### Question for the analysis
+
+1. How does the nutrition value compare with different cereals brands?
+
+
+### Loading Packages
+
+```{r}
+install.packages("dplyr") 
+library("dplyr")
+install.packages("ggplot2")
+library("ggplot2")
+```
+### Importing dataset
+For this project, I will use 80 Cereals [data](https://www.kaggle.com/datasets/crawford/80-cereals).
+I will be randomly sampling 29 cereal brands from the dataset.
+
+```{r}
+cereals <- read.csv("/cloud/project/cereals.csv")
+```
+
+### Exploring and summarizing data
+
+```{r}
+n_distinct(cereals)
+```
+This information tells us that there are 29 brand names in the dataset.
+
+### Analyzing dataset
+
+```{r}
+dataset <- cereals
+cereals <- cereals [ , c("name", "calories", "sodium", "protein", "sugars", "vitamins", "fiber")]
+cereals
+```
+For this analysis, I need the brand names, calories, sodium, protein, sugars and vitamins columns. Therefore I extracted them from the dataset.
+
+### Visualizing: Brands vs. Calories
+
+```{r}
+ggplot(data=cereals,aes(x=calories,y=name)) +
+  geom_bar(fill="turquoise4", stat="identity") +
+  theme(axis.text.y=element_text(size=5),
+        axis.text.x=element_text(size=5)) +
+  labs(title="Cereals : Brands vs. Calories") +
+  theme(plot.title = element_text(hjust = 0.5))
+```
+I see that the calories content for most of the brands exceeds over 100.
+
+### Visualizing: Brands vs. Sodium
+
+```{r}
+ggplot(data=cereals,aes(x=sodium,y=name)) +
+  geom_bar(fill="salmon2", stat="identity") +
+  theme(axis.text.y=element_text(size=5),
+        axis.text.x=element_text(size=5)) +
+  labs(title="Cereals : Brands vs. Sodium") +
+  theme(plot.title = element_text(hjust = 0.5))
+```
+I can see that the sodium content is also alarming high.
+
+### Visualizing: Brands vs. Protein
+
+```{r}
+ggplot(data=cereals,aes(x=protein,y=name)) +
+  geom_bar(fill="dodgerblue3", stat="identity") +
+  theme(axis.text.y=element_text(size=5),
+        axis.text.x=element_text(size=5)) +
+  labs(title="Cereals : Brands vs. Protein") +
+  theme(plot.title = element_text(hjust = 0.5))
+```
+As we can see, the protein content is less than 5gms. 
+
+### Visualizing: Brands vs. Sugar
+
+```{r}
+ggplot(data=cereals,aes(x=sugars,y=name)) +
+  geom_bar(fill="orangered2", stat="identity") +
+  theme(axis.text.y=element_text(size=5),
+        axis.text.x=element_text(size=5)) +
+  labs(title="Cereals : Brands vs. Sugar") +
+  theme(plot.title = element_text(hjust = 0.5))
+```
+### Visualizing: Brands vs. Vitamins
+
+```{r}
+ggplot(data=cereals,aes(x=vitamins,y=name)) +
+  geom_bar(fill="seagreen4", stat="identity") +
+  theme(axis.text.y=element_text(size=5),
+        axis.text.x=element_text(size=5)) +
+  labs(title="Cereals : Brands vs. Vitamin") +
+  theme(plot.title = element_text(hjust = 0.5))
+```
+### Visualizing: Brands vs. Fiber
+
+```{r}
+ggplot(data=cereals,aes(x=fiber,y=name)) +
+  geom_bar(fill="cornflowerblue", stat="identity") +
+  theme(axis.text.y=element_text(size=5),
+        axis.text.x=element_text(size=5)) +
+  labs(title="Cereals : Brands vs. Fiber") +
+  theme(plot.title = element_text(hjust = 0.5))
+```
+
+### Conclusion
+
+
+![](https://cdn.pixabay.com/photo/2014/09/26/09/33/girls-462072_1280.jpg){width=70%}
+
+
+As per our analysis, the nutritional value of protein, fiber, and vitamins is relatively lower than calories and sodium. As a result, cereal manufacturers should consider making their products more nutritionally dense by adding more protein, fibre, and vitamins while also lowering the sodium content. Thus, children can tackle numerous health problems easily.
+
+
